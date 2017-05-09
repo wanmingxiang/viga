@@ -1,3 +1,13 @@
+/***********************************************
+*      filename: delaypool.cpp
+*      version: ---
+*      
+*      @author: wanmx@foxmail.com
+*      @description: ---
+*      @create: 2017-05-10 02:25:32
+*      @last Modified: 2017-05-10 02:26:01
+************************************************/
+
 #include <time.h>
 #include <unistd.h>
 #include <stdlib.h>
