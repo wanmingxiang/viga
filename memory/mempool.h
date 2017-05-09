@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 //#include <malloc.h>
-//#include <new>
+#include <new>
 #include <vector>
 #include <ext/hash_map>
 #include <stdio.h>
