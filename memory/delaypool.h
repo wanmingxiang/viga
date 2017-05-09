@@ -1,3 +1,13 @@
+/***********************************************
+*      filename: delaypool.h
+*      version: ---
+*      
+*      @author: wanmx@foxmail.com
+*      @description: ---
+*      @create: 2017-05-10 02:11:54
+*      @last Modified: 2017-05-10 02:19:48
+************************************************/
+
 #ifndef VIGA_MEMORY_DELAY_MEMORY_POOL_H
 #define VIGA_MEMORY_DELAY_MEMORY_POOL_H
 

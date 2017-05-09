@@ -1,4 +1,4 @@
-SET(MEM_INCLUDE delaypool.h mempool.h)
+SET(MEM_INCLUDE delaypool.h mempool.h objectpool.h)
 SET(MEM_SRC delaypool.cpp)
 ADD_LIBRARY(memory STATIC ${MEM_SRC})
 INSTALL(TARGETS memory ARCHIVE DESTINATION lib)
