@@ -1,0 +1,2 @@
+ADD_SUBDIRECTORY(glog)
+ADD_SUBDIRECTORY(googletest)
