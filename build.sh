@@ -27,3 +27,14 @@ mkdir build && cd ./build
 cmake -DCMAKE_INSTALL_PREFIX=./ ..
 make -s
 make install
+cd ../
+
+#run test
+if [ -d ./test/build ]; then
+	rm -rf ./test/build
+fi
+mkdir -p ./test/build && cd ./test/build
+cmake ..
+make -s
+./test
+cd ../../
