@@ -5,7 +5,7 @@
 *      @author: wanmx@foxmail.com
 *      @description: ---
 *      @create: 2017-05-15 23:05:59
-*      @last Modified: 2017-05-16 01:33:50
+*      @last Modified: 2017-05-16 01:54:09
 ************************************************/
 
 #include <iostream>
@@ -70,7 +70,7 @@ public:
 	}
 
         void build_heap() {
-		for (int i = heap_len/2 - 1; i >= 0; i--) {
+		for (int i = (heap_len/2 - 1); i >= 0; i--) {
 			std::cout << "num:" << i << std::endl;
 			shift_down(i);
 			print_content();
@@ -86,7 +86,7 @@ private:
 
 int main() {
 	int test_in[] = {23,43,32,12,56,39,2,93,25,53,87,123,4};
-	MyHeap myheap(test_in, 12);
+	MyHeap myheap(test_in, 13);
 	myheap.print_content();
 	myheap.build_heap();
 	myheap.print_content();
