@@ -9,3 +9,4 @@ ADD_DEFINITIONS(
 
 
 ADD_EXECUTABLE(quick_sort quick_sort.cpp)
+ADD_EXECUTABLE(min_heap heap.cpp)
