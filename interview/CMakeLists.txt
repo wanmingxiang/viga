@@ -1,5 +1,10 @@
 cmake_minimum_required (VERSION 2.6)
 
+INCLUDE_DIRECTORIES(../build/include)
+FIND_LIBRARY(LIB_GLOG glog ../build/lib NO_DEFAULT_PATH)
+
+link_libraries(${LIB_GLOG})
+
 ADD_DEFINITIONS(
 -O0 -g -W -Wall
 -Wunused-variable -Wunused-parameter -Wunused-function -Wunused
@@ -10,3 +15,4 @@ ADD_DEFINITIONS(
 
 ADD_EXECUTABLE(quick_sort quick_sort.cpp)
 ADD_EXECUTABLE(min_heap heap.cpp)
+ADD_EXECUTABLE(list_reverse list_reverse.cpp)
