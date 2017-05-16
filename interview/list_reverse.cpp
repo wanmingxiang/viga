@@ -5,7 +5,7 @@
 *      @author: wanmx@foxmail.com
 *      @description: ---
 *      @create: 2017-05-16 23:43:46
-*      @last Modified: 2017-05-17 00:21:05
+*      @last Modified: 2017-05-17 01:24:49
 ************************************************/
 
 #include <glog/logging.h>
@@ -26,8 +26,20 @@ void print_list(node_t** head) {
 }
 
 void reverse(node_t** head) {
-
-
+	if (head == NULL || *head == NULL || (*head)->next == NULL)
+		return;
+	node_t* cur = (*head)->next;
+	node_t* cur_next = cur->next;
+	(*head)->next = NULL;
+	
+	while (cur != NULL) {
+		cur->next = *head;
+		head = cur;
+		cur = cur->next;
+		if (cur->next != NULL) 
+			cur_next = cur->next;
+	}
+	head = cur;
 
 }
 
@@ -44,6 +56,8 @@ int main() {
 		LOG(INFO) << item->id;
 	}
 	
+	print_list(&head);	
+	reverse(&head);
 	print_list(&head);	
 
 }
