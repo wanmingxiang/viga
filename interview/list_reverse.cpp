@@ -5,7 +5,7 @@
 *      @author: wanmx@foxmail.com
 *      @description: ---
 *      @create: 2017-05-16 23:43:46
-*      @last Modified: 2017-05-17 01:47:05
+*      @last Modified: 2017-05-17 01:54:02
 ************************************************/
 
 #include <glog/logging.h>
@@ -32,9 +32,7 @@ void reverse(node_t** head) {
 	node_t* cur = (*head)->next;
 	node_t* cur_next = cur->next;
 	p->next = NULL;
-	
 	while (cur != NULL) {
-		LOG(INFO) << cur->id;
 		cur->next = p;
 		p = cur;
 		if (cur_next != NULL) {
@@ -44,7 +42,7 @@ void reverse(node_t** head) {
 			break;
 		}
 	}
-	head = &p;
+	*head = p;
 
 }
 
