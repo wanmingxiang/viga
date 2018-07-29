@@ -1,13 +1,3 @@
-/***********************************************
-*      filename: objectpool.h
-*      version: ---
-*      
-*      @author: wanmx@foxmail.com
-*      @description: ---
-*      @create: 2017-05-10 02:12:03
-*      @last Modified: 2017-05-10 02:21:03
-************************************************/
-
 #ifndef VIGA_MEMORY_OBJECT_MEMORY_POOL_H
 #define VIGA_MEMORY_OBJECT_MEMORY_POOL_H
 

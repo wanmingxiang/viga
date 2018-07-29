@@ -1,19 +1,3 @@
-// =====================================================================================
-//
-//       Filename:  cow_btree.h
-//
-//    Description:  copy on write b+ tree(remove leaf node::next)
-//
-//        Version:  1.0
-//        Created:  08/02/2014 09:05:53 AM
-//       Revision:  none
-//       Compiler:  g++
-//
-//         Author:  Zhu Zilong (), zhuzilong@baidu.com
-//        Company:  baidu.com.houyi
-//
-// =====================================================================================
-
 #ifndef __NBSLIB_COW_B_TREE_H__
 #define __NBSLIB_COW_B_TREE_H__
 

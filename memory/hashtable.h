@@ -1,19 +1,3 @@
-// =====================================================================================
-//
-//       Filename:  hashtable.h
-//
-//    Description:  
-//
-//        Version:  1.0
-//        Created:  05/21/2014 02:07:04 PM
-//       Revision:  none
-//       Compiler:  g++
-//
-//         Author:  Zhu Zilong (), zhuzilong@baidu.com
-//        Company:  baidu.com.houyi
-//
-// =====================================================================================
-
 #ifndef __NBSLIB_HASH_TABLE_H__
 #define __NBSLIB_HASH_TABLE_H__
 

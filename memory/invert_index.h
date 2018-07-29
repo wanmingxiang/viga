@@ -1,19 +1,3 @@
-// =====================================================================================
-//
-//       Filename:  invert_index.h
-//
-//    Description:  
-//
-//        Version:  1.0
-//        Created:  05/28/2014 05:41:29 PM
-//       Revision:  none
-//       Compiler:  g++
-//
-//         Author:  Zhu Zilong (), zhuzilong@baidu.com
-//        Company:  baidu.com.houyi
-//
-// =====================================================================================
-
 #ifndef __NBSLIB_INVERT_INDEX_H__
 #define __NBSLIB_INVERT_INDEX_H__
 
