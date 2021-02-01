@@ -27,16 +27,27 @@ int32_t CreateHashTable(HashTableConf* conf, HashTable** ht)
     }
     memset(hashTable, 0, htSize);
     hashTable->conf = *conf;
+    (void)__atomic_add_fetch(&hashTable->ref, 1, __ATOMIC_SEQ_CST);
     return 0;
 }
 
-void ReleaseHashTable(HashTable** ht)
+void ReleaseHashTable(HashTable* hashTable)
 {
-    HashTable* hashTable = *ht;
     int32_t ref = __atomic_sub_fetch(&hashTable->ref, 1, __ATOMIC_SEQ_CST);
     if (ref == 0) {
         free(hashTable);
-        *ht = NULL;
+    }
+}
+
+HashTable* AcquireHashTable(HashTable* ht)
+{
+    (void)__atomic_add_fetch(&ht->ref, 1, __ATOMIC_SEQ_CST);
+    bool isActive = __atomic_load_n(&ht->active, __ATOMIC_SEQ_CST);
+    if (!isActive) {
+       ReleaseHashTable(ht); 
+       return NULL;
+    } else {
+        return ht;
     }
 }
 
@@ -108,12 +119,10 @@ int32_t rehash(KeyIndexMapImpl* keyIndexMap)
 HashTable* GetCurrentHashTable(KeyIndexMapImpl* keyIndexMap)
 {
     uint32_t cur = __atomic_load_n(&keyIndexMap->cur, __ATOMIC_ACQUIRE);
-    HashTable* ht = NULL;
+    HashTable* ht = AcquireHashTable(keyIndexMap->ht[cur]);
     while (true) {
-        ht = keyIndexMap->ht[cur];
-
+        
     };
-
 }
 
 int32_t InsertKeyIndexMap(KeyIndexMap map, const Key* key, uint32_t* idx)
