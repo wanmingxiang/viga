@@ -42,6 +42,7 @@ int32_t NormalMemoryPoolInit(NormalMemoryPool* memPool, uint32_t elementSize, ui
         return -1;
     }
     memPool->elementSize = (elementSize + sizeof(Element) - 1) / sizeof(Element) * sizeof(Element);
+    printf(" es %u \n", memPool->elementSize);
     memPool->pageSize = pageSize;
     memPool->allocNum = 0;
     memPool->freeNum = 0;
@@ -73,7 +74,9 @@ void* NormalMemoryPoolAlloc(NormalMemoryPool* memPool) {
     }
     memPool->pageVec[memPool->pageNum] = page;
     ++memPool->pageNum;
+    // printf(" es %u \n", memPool->elementSize);
     int num = memPool->pageSize / memPool->elementSize;
+    printf(" es %u \n", memPool->elementSize);
     for (int i = 0; i < num; ++i) {
         Element* ele = (Element*)(((char*)page) + memPool->elementSize * i);
         ele->next = memPool->freeList;
@@ -116,10 +119,11 @@ void* MultiCoreNormalMemPoolAlloc(MultiCoreNormalMemPool* multiCorePool, uint16_
     if (multiCorePool->arr[coreId] != NULL) {
         return NormalMemoryPoolAlloc(multiCorePool->arr[coreId]);
     }
-    multiCorePool->arr[coreId] = malloc(sizeof(NormalMemoryPool));
+    multiCorePool->arr[coreId] = (NormalMemoryPool*)malloc(sizeof(NormalMemoryPool));
     if (multiCorePool->arr[coreId] == NULL) {
         return NULL;
     }
+    NormalMemoryPoolInit(multiCorePool->arr[coreId], multiCorePool->elementSize, multiCorePool->pageSize);
     return NormalMemoryPoolAlloc(multiCorePool->arr[coreId]);
 }
 
@@ -142,14 +146,17 @@ void MultiMemoryPoolMgrDestroy(MultiMemoryPoolMgr* mgr) {
 
 int32_t MultiMemoryPoolMgrRegister(MultiMemoryPoolMgr* mgr, uint32_t size) {
     uint8_t idx = (size + mgr->bscSize - 1) / mgr->bscSize;
+    printf("bs %u \n", mgr->bscSize);
     mgr->size2IdMap[idx] = mgr->slabId;
-    mgr->slabs[mgr->slabId] = malloc(sizeof(MultiCoreNormalMemPool));
+    mgr->slabs[mgr->slabId] = (MultiCoreNormalMemPool*)malloc(sizeof(MultiCoreNormalMemPool));
     return MultiCoreNormalMemPoolInit(mgr->slabs[mgr->slabId], size, MEMPOOL_PAGE_SIZE);   
 }
 
 void* MultiMemoryPoolMgrAlloc(MultiMemoryPoolMgr* mgr, int size) {
     uint16_t coreId = 0;
     uint8_t idx = (size + mgr->bscSize - 1) / mgr->bscSize;
+
+    printf("bs %u \n", mgr->bscSize);
     uint32_t slabId = mgr->size2IdMap[idx];
     return MultiCoreNormalMemPoolAlloc(mgr->slabs[slabId], coreId);
 }
@@ -177,7 +184,8 @@ int main() {
     TestItem* cur = &head;
     uint32_t count = 10240;
     while (count > 0) {
-        TestItem* item = MultiMemoryPoolMgrAlloc(&mgr, sizeof(TestItem));
+//        TestItem* item = (TestItem*)MultiMemoryPoolMgrAlloc(&mgr, sizeof(TestItem));
+        TestItem* item = (TestItem*)malloc(sizeof(TestItem));
         item->next = NULL;
         item->c = count;
         count--;
@@ -186,10 +194,13 @@ int main() {
     }
     cur = &head;
     while (cur) {
+        TestItem* tmp = cur;
         printf(" %llu \n", cur->c);
         cur = cur->next;
+//        MultiMemoryPoolMgrFree(tmp, &mgr, sizeof(TestItem));
+        free(tmp);
     }
-    return 0;
+   return 0;
 }
 
 
